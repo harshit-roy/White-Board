@@ -7,8 +7,28 @@ const RoomPage = () => {
   const ctxRef = useRef(null);
 
   const [tool, setTool] = useState('pencil');
-  const [color, setColor] = useState('black');
+  const [color, setColor] = useState('#000000');
   const [elements, setElements] = useState([]);
+  const [history, setHistory] = useState([]);
+
+  const handleClearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.fillRect = 'white';
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    setElements([]);
+  };
+
+  const undo = () => {
+    setHistory(prevHistory => [...prevHistory, elements[elements.length - 1]]);
+
+    setElements(prevElements => prevElements.slice(0, prevElements.length - 1));
+  };
+
+  const redo = () => {
+    setElements(prevElements => [...prevElements, history[history.length - 1]]);
+    setHistory(prevHistory => prevHistory.slice(0, prevHistory.length - 1));
+  };
 
   return (
     <div className="row ">
@@ -70,11 +90,23 @@ const RoomPage = () => {
           </div>
         </div>
         <div className="col-md-2 d-flex gap-3 ">
-          <button className="btn btn-primary mt-1">Undo</button>
-          <button className="btn btn-primary mt-1">Redo</button>
+          <button
+            className="btn btn-primary mt-1"
+            disabled={elements.length === 0}
+            onClick={() => undo()}>
+            Undo
+          </button>
+          <button
+            className="btn btn-primary mt-1"
+            disabled={history.length < 1}
+            onClick={() => redo()}>
+            Redo
+          </button>
         </div>
         <div className="col-md-2">
-          <button className="btn btn-danger">Clear Canvas</button>
+          <button className="btn btn-danger" onClick={handleClearCanvas}>
+            Clear Canvas
+          </button>
         </div>
       </div>
       <div className="col-md-12 mx-auto mt-4 canvas-box">
@@ -83,6 +115,8 @@ const RoomPage = () => {
           ctxRef={ctxRef}
           elements={elements}
           setElements={setElements}
+          color={color}
+          tool={tool}
         />
       </div>
     </div>
