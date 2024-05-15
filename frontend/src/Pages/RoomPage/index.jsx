@@ -145,7 +145,7 @@ const RoomPage = ({user, socket, users}) => {
         </div>
       )}
 
-      <div className="col-md-12 mx-auto mt-4 canvas-box">
+      <div className="col-md-12 mx-auto mt-4 canvas-box ">
         <WhiteBoard
           canvasRef={canvasRef}
           ctxRef={ctxRef}

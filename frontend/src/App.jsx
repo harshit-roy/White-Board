@@ -47,18 +47,20 @@ const App = () => {
     return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
   };
   return (
-    <div className="container">
-      <ToastContainer />
-      <Routes>
-        <Route
-          path="/"
-          element={<Forms uuid={uuid} socket={socket} setUser={setUser} />}
-        />
-        <Route
-          path="/:roomId"
-          element={<RoomPage user={user} socket={socket} users={users} />}
-        />
-      </Routes>
+    <div className="main">
+      <div className="container">
+        <ToastContainer />
+        <Routes>
+          <Route
+            path="/"
+            element={<Forms uuid={uuid} socket={socket} setUser={setUser} />}
+          />
+          <Route
+            path="/:roomId"
+            element={<RoomPage user={user} socket={socket} users={users} />}
+          />
+        </Routes>
+      </div>
     </div>
   );
 };
