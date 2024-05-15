@@ -3,7 +3,7 @@ const app = express();
 
 const server = require('http').createServer(app);
 const {Server} = require('socket.io');
-
+const {addUser, getUser} = require('./utils/users');
 const io = new Server(server);
 //routes
 
@@ -18,7 +18,18 @@ io.on('connection', socket => {
     const {name, userId, roomId, host, presenter} = data;
     roomIdGlobal = roomId;
     socket.join(roomId);
-    socket.emit('userIsJoined', {success: true});
+    const users = addUser({
+      name,
+      userId,
+      roomId,
+      host,
+      presenter,
+      socketId: socket.id,
+    });
+
+    socket.emit('userIsJoined', {success: true, users});
+    socket.broadcast.to(roomId).emit('userJoinedMessageBroadcasted', name);
+    socket.broadcast.to(roomId).emit('allUsers', users);
     socket.broadcast
       .to(roomId)
       .emit('whiteboardDataResponce', {imgURL: imgURLGlobal});

@@ -23,11 +23,14 @@ const WhiteBoard = ({
 
   if (user && !user.presenter) {
     return (
-      <div className="border p-5 border-dark border-3 h-75 w-100 overflow-hidden">
+      <div className="border border-dark border-3 h-75 w-100 overflow-hidden">
         <img
           src={img}
           alt="Real time white board image shared by presenter"
-          className="w-100 h-100"
+          style={{
+            height: window.innerHeight,
+            width: '285%',
+          }}
         />
       </div>
     );
