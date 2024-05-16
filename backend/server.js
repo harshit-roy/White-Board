@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 const server = require('http').createServer(app);
 const {Server} = require('socket.io');
 const {addUser, getUser} = require('./utils/users');
@@ -43,5 +43,12 @@ io.on('connection', socket => {
 });
 
 const port = process.env.PORT || 5000;
+
+//cors
+const corsOpt = {
+  origin: '*',
+  credentials: true,
+};
+app.use(cors(corsOpt));
 
 server.listen(port, () => console.log(`Server is running on ${port}`));
