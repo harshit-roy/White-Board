@@ -50,7 +50,7 @@ const App = () => {
     <>
       <div className="error-message">
         <p className="error-text">
-          Please access this website from a web view.
+          This website is designed for desktop use only.
         </p>
         <img
           className="h-100 w-100"
