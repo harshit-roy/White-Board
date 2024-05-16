@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 
 import {ToastContainer, toast} from 'react-toastify';
 
-const server = 'http://localhost:5000';
+const server = 'https://white-board-collaborator.onrender.com';
 const connectionOptions = {
   'force new connection': true,
   reconnectionAttempts: 'Infinity',
