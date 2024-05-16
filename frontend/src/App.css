@@ -1,1 +1,30 @@
+html {
+  background-color: #0c1f38;
+}
+.main {
+  height: 00vh;
+}
+.error-message {
+  display: none;
+}
+.error-text {
+  font-size: 18px;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10%;
+  justify-content: center;
+  align-items: center;
+}
 
+/* Media query for detecting mobile devices */
+@media only screen and (max-width: 768px) {
+  .error-message {
+    display: block;
+  }
+  .main {
+    display: none;
+  }
+}

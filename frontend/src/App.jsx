@@ -47,21 +47,32 @@ const App = () => {
     return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
   };
   return (
-    <div className="main">
-      <div className="container">
-        <ToastContainer />
-        <Routes>
-          <Route
-            path="/"
-            element={<Forms uuid={uuid} socket={socket} setUser={setUser} />}
-          />
-          <Route
-            path="/:roomId"
-            element={<RoomPage user={user} socket={socket} users={users} />}
-          />
-        </Routes>
+    <>
+      <div className="error-message">
+        <p className="error-text">
+          Please access this website from a web view.
+        </p>
+        <img
+          className="h-100 w-100"
+          src="https://i.pinimg.com/originals/86/03/ec/8603ec58ba347cff6baabc2bcdf09613.gif"
+        />
       </div>
-    </div>
+      <div className="main">
+        <div className="container">
+          <ToastContainer />
+          <Routes>
+            <Route
+              path="/"
+              element={<Forms uuid={uuid} socket={socket} setUser={setUser} />}
+            />
+            <Route
+              path="/:roomId"
+              element={<RoomPage user={user} socket={socket} users={users} />}
+            />
+          </Routes>
+        </div>
+      </div>
+    </>
   );
 };
 

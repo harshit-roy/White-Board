@@ -2,6 +2,7 @@ import WhiteBoard from '../../components/WhiteBoard';
 import './index.css';
 import {useState, useRef, useEffect} from 'react';
 
+import {ToastContainer, toast} from 'react-toastify';
 const RoomPage = ({user, socket, users}) => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
@@ -35,7 +36,7 @@ const RoomPage = ({user, socket, users}) => {
     <div className="row ">
       <button
         type="button"
-        className="btn btn-dark"
+        className="btn btn-light"
         style={{
           display: 'block',
           position: 'absolute',
@@ -50,29 +51,32 @@ const RoomPage = ({user, socket, users}) => {
       {openUserTab && (
         <div
           className="position-fixed top-0 h-100 text-white bg-dark"
-          style={{width: '250px', left: '0%'}}>
+          style={{width: '260px', left: '0%'}}>
           <button
             type="button"
             onClick={() => setOpenUserTab(false)}
             className="btn btn-light btn-block w-100 mt-5">
             Close
           </button>
-          <div className="w-100 mt-5 pt-5">
-            {users.map((usr, index) => (
-              <p key={index * 999} className="my-2 text-center w-100">
-                {usr.name}
-                {user && user.userId === usr.userId && ' (You)'}
-              </p>
-            ))}
+          <div className="bg-black h-75 border rounded mt-5 border-0 py-3">
+            <h5 className="text-center mt-5 text-primary">Active Users</h5>
+            <div className="w-100 mt-3">
+              {users.map((usr, index) => (
+                <p key={index * 999} className="my-2 px-5 w-100">
+                  {index + 1}. {usr.name}
+                  {user && user.userId === usr.userId && ' (You)'}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       )}
-      <h1 className="text-center py-5">
-        White Board Sharing App
-        <span className="text-primary">[User Online : {users.length}]</span>
+      <h1 className="text-center py-5 text-white">
+        White Board Collaborator
+        <span className="text-primary"> [User Online : {users.length}]</span>
       </h1>
       {user?.presenter && (
-        <div className="col-md-12 mx-auto d-flex align-items-center justify-content-around">
+        <div className="col-md-12 mx-auto d-flex align-items-center justify-content-around text-white">
           <div className="d-flex col-md-4 justify-content-around gap-2">
             <div className="d-flex gap-1">
               <label htmlFor="pencil">Pencil</label>
@@ -145,7 +149,7 @@ const RoomPage = ({user, socket, users}) => {
         </div>
       )}
 
-      <div className="col-md-12 mx-auto mt-4 canvas-box ">
+      <div className="col-md-12 mx-auto my-5 mt-4 canvas-box ">
         <WhiteBoard
           canvasRef={canvasRef}
           ctxRef={ctxRef}

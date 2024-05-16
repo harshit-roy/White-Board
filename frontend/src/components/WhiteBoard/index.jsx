@@ -23,13 +23,13 @@ const WhiteBoard = ({
 
   if (user && !user.presenter) {
     return (
-      <div className="border border-dark border-4 h-75 w-100 overflow-hidden">
+      <div className=" border-4 h-100 w-100 overflow-hidden">
         <img
           src={img}
           alt="Real time white board image shared by presenter"
           style={{
             height: window.innerHeight,
-            width: '285%',
+            width: '240% ',
           }}
         />
       </div>
@@ -212,7 +212,7 @@ const WhiteBoard = ({
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        className="border border-dark border-4 rounded h-75 w-100 overflow-hidden ">
+        className="rounded h-100 w-110 overflow-hidden ">
         <canvas ref={canvasRef} />
       </div>
     </>
